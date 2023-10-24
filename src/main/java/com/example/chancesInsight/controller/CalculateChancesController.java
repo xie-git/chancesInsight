@@ -1,5 +1,6 @@
 package com.example.chancesInsight.controller;
 
+import com.example.chancesInsight.model.MatchStatsDTO;
 import com.example.chancesInsight.model.PersonPreference;
 import com.example.chancesInsight.service.CalculateChancesService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,13 +34,14 @@ public class CalculateChancesController {
         return ResponseEntity.ok(result);
     }
 
-    @PostMapping("/countyPop")
+    @PostMapping("/matchStats")
     public ResponseEntity<?> calculateCountyPop(@RequestBody PersonPreference preference) {
         // Use the service to process the PersonPreference and obtain a result
-        int countyPop = this.ccs.processPreferenceCounty(preference);
+        MatchStatsDTO matchStats = this.ccs.generateMatchStats(preference);
+
 
         // Return the result (or you can modify this to return any other type of response)
-        return ResponseEntity.ok(countyPop);
+        return ResponseEntity.ok(matchStats);
     }
 
 }
