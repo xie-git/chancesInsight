@@ -17,13 +17,28 @@ public class MatchStatsDTO {
     private int stateFemalePop = (int) Math.round(statePop * stateFemaleProp);
 
     private int countyPop;
-    private double countyMaleProp;
-    private double countyFemaleProp = 1 - countyMaleProp;
-    private int countyMalePop = (int) Math.round(countyPop * countyMaleProp);
-    private int countyFemalePop = (int) Math.round(statePop * stateFemaleProp);
+    private double countyGenderPreferenceProp;
+    private int countyGenderPreferencePop;
 
-    private double heightPreferenceProp;
-    private int genderPreferenceCountyPopulation;
+    private int totalPopOfAgeRangeInCounty;
+
+    private double heightPreferenceAgePreferenceProp;
+
+    private int stateMalePopOver18;
+    private int stateFemalePopOver18;
+
+    private double agePreferenceMarriedProp;
+    private double agePreferenceUnmarriedProp;
+    private int ageGenderPreferenceMarriedPop;
+
+    private int countyAgeGenderHeightPreferenceUnmarriedOver18Pop;
+
+    private double countyHeightAgePreferenceProp;
+
+    private int countyMalePop;
+    private int countyFemalePop;
+
+
 
     public int getCountryPop() {
         return countryPop;
@@ -93,20 +108,94 @@ public class MatchStatsDTO {
         this.countyPop = countyPop;
     }
 
-    public double getCountyMaleProp() {
-        return countyMaleProp;
+    public double getHeightPreferenceAgePreferenceProp() {
+        return heightPreferenceAgePreferenceProp;
     }
 
-    public void setCountyMaleProp(double countyMaleProp) {
-        this.countyMaleProp = countyMaleProp;
+    public void setHeightPreferenceAgePreferenceProp(double heightPreferenceAgePrefernceProp) {
+        this.heightPreferenceAgePreferenceProp = heightPreferenceAgePrefernceProp;
     }
 
-    public double getCountyFemaleProp() {
-        return countyFemaleProp;
+
+    public double getCountyGenderPreferenceProp() {
+        return countyGenderPreferenceProp;
     }
 
-    public void setCountyFemaleProp(double countyFemaleProp) {
-        this.countyFemaleProp = countyFemaleProp;
+    public void setCountyGenderPreferenceProp(double countyGenderPreferenceProp) {
+        this.countyGenderPreferenceProp = countyGenderPreferenceProp;
+    }
+
+    public int getCountyGenderPreferencePop() {
+        return countyGenderPreferencePop;
+    }
+
+    public void setCountyGenderPreferencePop(int countyGenderPreferencePop) {
+        this.countyGenderPreferencePop = countyGenderPreferencePop;
+    }
+
+    public int getTotalPopOfAgeRangeInCounty() {
+        return totalPopOfAgeRangeInCounty;
+    }
+
+    public void setTotalPopOfAgeRangeInCounty(int totalPopOfAgeRangeInCounty) {
+        this.totalPopOfAgeRangeInCounty = totalPopOfAgeRangeInCounty;
+    }
+
+    public int getStateMalePopOver18() {
+        return stateMalePopOver18;
+    }
+
+    public void setStateMalePopOver18(int stateMalePopOver18) {
+        this.stateMalePopOver18 = stateMalePopOver18;
+    }
+
+    public int getStateFemalePopOver18() {
+        return stateFemalePopOver18;
+    }
+
+    public void setStateFemalePopOver18(int stateFemalePopOver18) {
+        this.stateFemalePopOver18 = stateFemalePopOver18;
+    }
+
+    public double getAgePreferenceMarriedProp() {
+        return agePreferenceMarriedProp;
+    }
+
+    public void setAgePreferenceMarriedProp(double agePreferenceMarriedProp) {
+        this.agePreferenceMarriedProp = agePreferenceMarriedProp;
+    }
+
+    public int getAgeGenderPreferenceMarriedPop() {
+        return ageGenderPreferenceMarriedPop;
+    }
+
+    public void setAgeGenderPreferenceMarriedPop(int ageGenderPreferenceMarriedPop) {
+        this.ageGenderPreferenceMarriedPop = ageGenderPreferenceMarriedPop;
+    }
+
+
+    public int getCountyAgeGenderHeightPreferenceUnmarriedOver18Pop() {
+        return countyAgeGenderHeightPreferenceUnmarriedOver18Pop;
+    }
+
+    public void setCountyAgeGenderHeightPreferenceUnmarriedPop(int countyAgeGenderHeightPreferenceUnmarriedOver18Pop) {
+        this.countyAgeGenderHeightPreferenceUnmarriedOver18Pop = countyAgeGenderHeightPreferenceUnmarriedOver18Pop;
+    }
+
+    public double getAgePreferenceUnmarriedProp() {
+        return agePreferenceUnmarriedProp;
+    }
+
+    public void setAgePreferenceUnmarriedProp(double agePreferenceUnmarriedProp) {
+        this.agePreferenceUnmarriedProp = agePreferenceUnmarriedProp;
+    }
+
+    public double getCountyHeightAgePreferenceProp() {
+        return countyHeightAgePreferenceProp;
+    }
+
+    public void setCountyHeightAgePreferenceProp(double countyHeightAgePreferenceProp) {
+        this.countyHeightAgePreferenceProp = countyHeightAgePreferenceProp;
     }
 
     public int getCountyMalePop() {
@@ -123,21 +212,5 @@ public class MatchStatsDTO {
 
     public void setCountyFemalePop(int countyFemalePop) {
         this.countyFemalePop = countyFemalePop;
-    }
-
-    public double getHeightPreferenceProp() {
-        return heightPreferenceProp;
-    }
-
-    public void setHeightPreferenceProp(double heightPreferenceProp) {
-        this.heightPreferenceProp = heightPreferenceProp;
-    }
-
-    public int getGenderPreferenceCountyPopulation() {
-        return genderPreferenceCountyPopulation;
-    }
-
-    public void setGenderPreferenceCountyPopulation(int genderPreferenceCountyPopulation) {
-        this.genderPreferenceCountyPopulation = genderPreferenceCountyPopulation;
     }
 }

@@ -49,6 +49,9 @@ public class StateData {
     @Column(name = "st_abb")
     private String stAbb;
 
+    @Column(name = "miscellaneous_percent_female")
+    private double percentFemale;
+
     public String getState() {
         return state;
     }
@@ -151,5 +154,13 @@ public class StateData {
 
     public void setStAbb(String stAbb) {
         this.stAbb = stAbb;
+    }
+
+    public double getPercentFemale() {
+        return percentFemale;
+    }
+
+    public void setPercentFemale(double percentFemale) {
+        this.percentFemale = percentFemale;
     }
 }
