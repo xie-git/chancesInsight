@@ -2,12 +2,14 @@ package com.example.chancesInsight.model;
 
 public class MatchStatsDTO {
     // update later for more countries?
-    private final int countryPop = 331449520;
-    private final double countryMaleProp = 0.5051;
-    private final double countryFemaleProp = 1 - countryMaleProp;
+    public final int countryPop = 331449520;
+    public final double countryMaleProp = 0.5051;
+    public final double countryFemaleProp = 1 - countryMaleProp;
+    public final double singleParentFemaleProp = (double) 11424000 / countryPop;
+    public final double singleParentMaleProp = (double) 2176000 / countryPop;
 
-    private final int countryMalePop = (int) Math.round(countryPop * countryMaleProp);
-    private final int countryFemalePop = (int) Math.round(countryPop * countryFemaleProp);
+    public final int countryMalePop = (int) Math.round(countryPop * countryMaleProp);
+    public final int countryFemalePop = (int) Math.round(countryPop * countryFemaleProp);
 
 
     private int statePop;
@@ -37,6 +39,9 @@ public class MatchStatsDTO {
 
     private int countyMalePop;
     private int countyFemalePop;
+
+    private int countyAgeGenderHeightPreferenceUnmarriedOver18ChildlessPop;
+
 
 
 
@@ -178,7 +183,7 @@ public class MatchStatsDTO {
         return countyAgeGenderHeightPreferenceUnmarriedOver18Pop;
     }
 
-    public void setCountyAgeGenderHeightPreferenceUnmarriedPop(int countyAgeGenderHeightPreferenceUnmarriedOver18Pop) {
+    public void setCountyAgeGenderHeightPreferenceUnmarriedOver18Pop(int countyAgeGenderHeightPreferenceUnmarriedOver18Pop) {
         this.countyAgeGenderHeightPreferenceUnmarriedOver18Pop = countyAgeGenderHeightPreferenceUnmarriedOver18Pop;
     }
 
@@ -212,5 +217,21 @@ public class MatchStatsDTO {
 
     public void setCountyFemalePop(int countyFemalePop) {
         this.countyFemalePop = countyFemalePop;
+    }
+
+    public double getSingleParentFemaleProp() {
+        return singleParentFemaleProp;
+    }
+
+    public double getSingleParentMaleProp() {
+        return singleParentMaleProp;
+    }
+
+    public int getCountyAgeGenderHeightPreferenceUnmarriedOver18ChildlessPop() {
+        return countyAgeGenderHeightPreferenceUnmarriedOver18ChildlessPop;
+    }
+
+    public void setCountyAgeGenderHeightPreferenceUnmarriedOver18ChildlessPop(int countyAgeGenderHeightPreferenceUnmarriedOver18ChildlessPop) {
+        this.countyAgeGenderHeightPreferenceUnmarriedOver18ChildlessPop = countyAgeGenderHeightPreferenceUnmarriedOver18ChildlessPop;
     }
 }

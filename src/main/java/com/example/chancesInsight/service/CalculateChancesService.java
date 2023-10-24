@@ -48,25 +48,28 @@ public class CalculateChancesService {
 
     public double calculateHeightProportion(Gender genderPreference, int agePreferenceLow, int agePreferenceHigh, int heightPreferenceLow, int heightPreferenceHigh) {
         String agePref;
-        if (agePreferenceHigh < 29) {
+        if (agePreferenceHigh <= 29) {
             agePref = "height_20_29";
-        } else if (agePreferenceHigh < 39) {
+        } else if (agePreferenceHigh <= 39) {
             agePref = "height_30_39";
-        } else if (agePreferenceHigh < 49) {
+        } else if (agePreferenceHigh <= 49) {
             agePref = "height_40_49";
-        } else if (agePreferenceHigh < 59) {
+        } else if (agePreferenceHigh <= 59) {
             agePref = "height_50_59";
-        } else if (agePreferenceHigh < 69) {
+        } else if (agePreferenceHigh <= 69) {
             agePref = "height_60_69";
         } else {
             agePref = "height_70_79";
         }
+        logger.info("agePref: " + agePref);
 
 
         List<Double> minMaxHeightProportion = this.hdr.findByPreferences(genderPreference.toString(), agePref, heightPreferenceLow, heightPreferenceHigh);
-
-        double heightPrefProp = minMaxHeightProportion.get(1) - minMaxHeightProportion.get(0);
+        logger.info("minMaxHeightProportion: " + minMaxHeightProportion);
+        double heightPrefProp = Math.abs(minMaxHeightProportion.get(1) - minMaxHeightProportion.get(0));
+        logger.info("heightPrefProp: " + heightPrefProp);
         return heightPrefProp;
+
     }
 
     public double calculateMarriageRateByAge(int agePreferenceLow, int agePreferenceHigh) {
@@ -191,7 +194,6 @@ public class CalculateChancesService {
 
         int statePop = this.sdr.findById(statePreference.toString()).get().getPopulation2020();
 
-
         CountyDataKey countyDataKey = new CountyDataKey(statePreference.toString(), countyPreference, 0);
 
         Optional<StateData> stateData = this.sdr.findById(statePreference.toString());
@@ -200,7 +202,7 @@ public class CalculateChancesService {
         int totalCountyPopulation = countyDataTotal.get().getTotPop(); // total population of the county preference
         int totalPopOfAgeRangeGenderPreferenceInCounty = calculateTotalPopOfAgeRangeInCounty(genderPreference, agePreferenceLow, agePreferenceHigh, statePreference.toString(), countyPreference); // total population of all people within preferred age range in county
         double heightAgePreferenceProp = calculateHeightProportion(genderPreference, agePreferenceLow, agePreferenceHigh, heightPreferenceLow, heightPreferenceHigh) / 100; // total proportion of people with your gender preference and age preference and height preference
-
+        logger.info("heightAgePreferenceProp: " + heightAgePreferenceProp);
 
 
         double stateFemaleProp = stateData.get().getPercentFemale() / 100;
@@ -236,19 +238,16 @@ public class CalculateChancesService {
         matchStats.setCountyMalePop(countyDataTotal.get().getMalePop());
         matchStats.setCountyFemalePop(countyDataTotal.get().getFemalePop());
 
-        int countyAgeGenderHeightPreferenceUnmarriedOver18Pop = (int) Math.round(countyMalePop * (1 - agePreferenceMarriedProp) * heightAgePreferenceProp * stateOver18Prop);
-
         if (genderPreference == Gender.MALE) {
             matchStats.setCountyGenderPreferenceProp(countyDataTotal.get().getMaleProp());
             matchStats.setCountyGenderPreferencePop(countyDataTotal.get().getMalePop());
-            matchStats.setCountyAgeGenderHeightPreferenceUnmarriedPop(countyAgeGenderHeightPreferenceUnmarriedOver18Pop);
-            logger.info("countyAgeGenderHeightPreferenceUnmarriedOver18Pop: " + countyAgeGenderHeightPreferenceUnmarriedOver18Pop);
-            logger.info("countyMalePop: " + countyMalePop);
-            logger.info("agePreferenceMarriedProp: " + agePreferenceMarriedProp);
-            logger.info("heightAgePreferenceProp: " + heightAgePreferenceProp);
+            matchStats.setCountyAgeGenderHeightPreferenceUnmarriedOver18Pop((int) Math.round(countyMalePop * (1 - agePreferenceMarriedProp) * heightAgePreferenceProp * stateOver18Prop));
+            matchStats.setCountyAgeGenderHeightPreferenceUnmarriedOver18ChildlessPop((int) Math.round(countyMalePop * (1 - agePreferenceMarriedProp) * heightAgePreferenceProp * stateOver18Prop * matchStats.singleParentMaleProp));
         } else {
             matchStats.setCountyGenderPreferenceProp(countyDataTotal.get().getFemaleProp());
             matchStats.setCountyGenderPreferencePop(countyDataTotal.get().getFemalePop());
+            matchStats.setCountyAgeGenderHeightPreferenceUnmarriedOver18Pop((int) Math.round(countyFemalePop * (1 - agePreferenceMarriedProp) * heightAgePreferenceProp * stateOver18Prop));
+            matchStats.setCountyAgeGenderHeightPreferenceUnmarriedOver18ChildlessPop((int) Math.round(countyFemalePop * (1 - agePreferenceMarriedProp) * heightAgePreferenceProp * stateOver18Prop * matchStats.singleParentFemaleProp));
         }
 
 
